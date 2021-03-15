@@ -1,26 +1,32 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {
-  BrowserRouter as Router,
+import {BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
 
 class Profile extends Component {
-  state = {
-    firstname: '',
-    lastname:'',
-    email:'',
-    number:''
-  }
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
   
   render() {
-    
+    <Formik initialValues={{ email: '' }}
+    onSubmit={(values, { setSubmitting }) => {
+      console.log('submitted')
+    }}
+    validationSchema={Yup.object().shape({
+      email: Yup.string().email().required('Email is required'),
+    })}>
+      {(props) => {
+                const {
+                  values,
+                  touched,
+                  errors,
+                  isSubmitting,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                } = props;   
     return (
       <form>
       <section class="content-wapper">
@@ -35,6 +41,7 @@ class Profile extends Component {
               </div>
               
               <div class="panel-body admin-profile">
+                
                 <div class="vrow">
                   <div class="vcol-4">
                     <div class="form-group">
@@ -105,7 +112,8 @@ class Profile extends Component {
           </form>
     );
       }
-  
+    }  
+    </Formik> 
     }
-
+  }
 export default Profile;
