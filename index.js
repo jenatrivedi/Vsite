@@ -15,7 +15,10 @@ class Profile extends Component {
       console.log('submitted')
     }}
     validationSchema={Yup.object().shape({
+      firstname: Yup.string().firstname().required('Firstname is required'),
+      lastname: Yup.string().lastname().required('Lastname is required'),
       email: Yup.string().email().required('Email is required'),
+      number: Yup.string().number().required('Number is required'),
     })}>
       {(props) => {
                 const {
@@ -39,7 +42,6 @@ class Profile extends Component {
               <div class="panel-head">
                 <div class="title">Admin Profile</div>
               </div>
-              
               <div class="panel-body admin-profile">
                 
                 <div class="vrow">
@@ -111,8 +113,7 @@ class Profile extends Component {
           </section>
           </form>
     );
-      }
-    }  
+      }}
     </Formik> 
     }
   }
